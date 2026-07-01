@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DreamBod</title>
+<link rel="stylesheet" href="themeAndStyle.css">
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <p class="tagline">No more guessing. Track your journey. ACHIEVE YOUR</p>
+    <div class="title-row">
+      <!-- cyan dumbbell logo, drawn in SVG -->
+      <svg class="logo" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="6"  y="24" width="8"  height="16" rx="2" fill="#2ff0dd"/>
+        <rect x="14" y="20" width="8"  height="24" rx="2" fill="#2ff0dd"/>
+        <rect x="42" y="20" width="8"  height="24" rx="2" fill="#2ff0dd"/>
+        <rect x="50" y="24" width="8"  height="16" rx="2" fill="#2ff0dd"/>
+        <rect x="22" y="29" width="20" height="6"  rx="3" fill="#2ff0dd"/>
+      </svg>
+      <h1><span class="dream">Dream</span><span class="bod">Bod</span></h1>
+    </div>
+  </header>
+
+  <div class="ledger">
+    <div class="net">
+      <div class="net-label">Net vs maintenance</div>
+      <div class="net-value muted" id="netValue">—</div>
+      <div class="net-sub" id="netSub">Calculate maintenance, then log food & workouts</div>
+    </div>
+    <div class="stat">
+      <div class="n" id="statMaint">0</div>
+      <div class="l">Maintenance</div>
+    </div>
+    <div class="stat">
+      <div class="n" id="statFood">0</div>
+      <div class="l">Food</div>
+    </div>
+    <div class="stat">
+      <div class="n" id="statBurn">0</div>
+      <div class="l">Burned</div>
+    </div>
+  </div>
+
+  <div class="grid">
+
+    <div class="card">
+      <h2>Maintenance Calories</h2>
+      <div class="field-row">
+        <div>
+          <label>Age</label>
+          <input type="number" id="age" value="22">
+        </div>
+        <div>
+          <label>Sex</label>
+          <select id="sex">
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+          </select>
+        </div>
+      </div>
+      <div class="field-row">
+        <div>
+          <label>Weight (lbs)</label>
+          <input type="number" id="weight" value="170">
+        </div>
+        <div>
+          <label>Height (inches)</label>
+          <input type="number" id="height" value="70">
+        </div>
+      </div>
+      <label>Activity level</label>
+      <select id="activity">
+        <option value="1.2">Sedentary</option>
+        <option value="1.375">Light</option>
+        <option value="1.55" selected>Moderate</option>
+        <option value="1.725">Very active</option>
+      </select>
+      <button onclick="calcTDEE()">Calculate maintenance</button>
+      <div class="out muted" id="result">Your daily target appears here</div>
+    </div>
+
+    <div class="card">
+      <h2>Workout Burn</h2>
+      <label>Workout type</label>
+      <select id="workoutType">
+        <option value="running">Running</option>
+        <option value="cycling">Cycling</option>
+        <option value="weightlifting">Weightlifting</option>
+        <option value="swimming">Swimming</option>
+        <option value="walking">Walking</option>
+      </select>
+      <div class="field-row">
+        <div>
+          <label>Duration (minutes)</label>
+          <input type="number" id="minutes" value="60">
+        </div>
+        <div>
+          <label>Body weight (lbs)</label>
+          <input type="number" id="bodyWeight" value="160">
+        </div>
+      </div>
+      <button onclick="calcWorkout()">Add workout</button>
+      <div class="out muted" id="burnResult">Estimated burn appears here</div>
+    </div>
+
+    <div class="card full">
+      <h2>Food Log</h2>
+      <div class="field-row">
+        <div style="flex:2;">
+          <label>Food name</label>
+          <input type="text" id="foodName" placeholder="rice, chicken, banana…">
+        </div>
+        <div>
+          <label>Grams</label>
+          <input type="number" id="grams" value="200">
+        </div>
+      </div>
+      <button onclick="searchFood()">Add food</button>
+      <div class="out muted" id="foodResult">Search a food to log its calories</div>
+      <ul id="foodList"></ul>
+    </div>
+
+    <div class="card full">
+      <h2>Daily Summary</h2>
+      <div class="row-actions">
+        <button onclick="calcDeficit()">Show my deficit</button>
+        <button class="ghost" onclick="resetDay()">Reset / new day</button>
+      </div>
+      <div class="out muted" id="deficitResult">Maintenance − food + burned = your deficit</div>
+    </div>
+
+    <div class="card full">
+      <h2>History</h2>
+      <div class="out muted" id="historyEmpty">Finish a day and hit “Reset / new day” to log it here.</div>
+      <ul id="historyList"></ul>
+    </div>
+
+  </div>
+</div>
+
+<script src="functions.js"></script>
+</body>
+</html>
